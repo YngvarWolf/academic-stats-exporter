@@ -1,13 +1,12 @@
 package org.example;
 
-import org.example.comparator.StudentComparator;
-import org.example.comparator.UniversityComparator;
-import org.example.enums.StudentComparatorType;
-import org.example.enums.UniversityComparatorType;
 import org.example.model.Student;
 import org.example.model.StudyProfile;
 import org.example.model.University;
+import org.example.model.Statistics;
 import org.example.util.ComparatorUtil;
+import org.example.util.StatisticsUtil;
+import org.example.util.XlsWriter;
 
 import java.util.List;
 
@@ -24,13 +23,12 @@ public class Main {
                 new University("UNI002", "СПбГУ", "СПбГУ", 1819, StudyProfile.ECONOMICS)
         );
 
-        StudentComparator studentComparator = ComparatorUtil.getStudentComparator(StudentComparatorType.AVG_EXAM_SCORE);
-        UniversityComparator universityComparator = ComparatorUtil.getUniversityComparator(UniversityComparatorType.YEAR_OF_FOUNDATION);
+        var statisticsList = StatisticsUtil.collectStatistics(students, universities);
 
-        System.out.println("Сортированные студенты по среднему баллу (по убыванию):");
-        students.stream().sorted(studentComparator).forEach(System.out::println);
+        System.out.println("Статистика:");
+        statisticsList.forEach(System.out::println);
 
-        System.out.println("\nСортированные университеты по году основания:");
-        universities.stream().sorted(universityComparator).forEach(System.out::println);
+        XlsWriter.writeStatisticsToXls(statisticsList, "statistics.xlsx");
+        System.out.println("Файл statistics.xlsx успешно создан.");
     }
 }
