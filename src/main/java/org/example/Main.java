@@ -3,8 +3,6 @@ package org.example;
 import org.example.model.Student;
 import org.example.model.StudyProfile;
 import org.example.model.University;
-import org.example.model.Statistics;
-import org.example.util.ComparatorUtil;
 import org.example.util.StatisticsUtil;
 import org.example.util.XlsWriter;
 
